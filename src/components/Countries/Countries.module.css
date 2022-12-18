@@ -1,0 +1,21 @@
+.container{
+  background-color: rgb(115, 145, 215);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: space-between;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 10px;
+  bottom: 1px;
+  overflow: auto;
+  background-color: transparent;
+}
+@media only screen and (max-width: 600px){
+  /*Big smartphones [426px -> 600px]*/
+  .container{
+
+}
+}

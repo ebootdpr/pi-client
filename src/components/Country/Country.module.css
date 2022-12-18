@@ -1,0 +1,50 @@
+.container{
+ width: 190px;
+ margin: 2px;
+ height: 190px;
+ border: solid 2px  rgba(0, 0, 0, 0.185);
+ opacity: 0.5;
+}
+
+.flag{
+ width: 190px;
+ height: min-content;
+}
+.container:hover {
+ animation: Clickme infinite .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+ cursor: zoom-in;
+ background-color: rgb(191, 221, 221);
+ border: solid rgb(255, 109, 56) 2px;
+ opacity: .95;
+}
+
+@keyframes Clickme {
+from {
+ transform: rotate(1deg) scale(1.1);
+ 
+}
+45% {
+ transform: rotate(-1deg) scale(1.0);
+ 
+}
+to {
+ transform: rotate(1deg) scale(1.1);
+
+
+}}
+
+@media only screen and (max-width: 600px){
+ /*Big smartphones [426px -> 600px]*/
+  .container{
+      flex-direction: row;
+      align-items:center;
+      width: 80%;
+  }
+  .flag{
+   width: 100%;
+  }
+  .charheader{
+      display: none;
+  }
+ 
+ }

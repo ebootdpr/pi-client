@@ -1,0 +1,6 @@
+.container{
+ display: flex;
+ background-color: darkcyan;
+ height: 25px;
+ justify-content: space-around;
+}
