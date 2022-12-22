@@ -1,0 +1,21 @@
+.container{
+ background-color: #063b3b;
+ display: flex;
+ position: fixed;
+ top: 45px;
+ left: 0px;
+ width: var(--FilterBarWidth);
+ flex-direction: var(--flow);
+ align-items: center;
+ align-content: flex-start;
+ justify-content: flex-start;
+ font-size: calc(10px + 2vmin);
+ color: white;
+ height: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+ .container {
+  
+ }
+}

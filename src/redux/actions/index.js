@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios"
 export const GET_DATA = 'GET_DATA'
+export const PUSH_ACTIVITY = 'PUSH_ACTIVITY'
 export const ADD_ACTIVITY = 'ADD_ACTIVITY'
 export const ASSIGN_ACTIVITY = 'ASSIGN_ACTIVITY'
 export const REMOVE_ACTIVITY = 'REMOVE_ACTIVITY'
@@ -9,22 +11,20 @@ export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND'
 
 // eslint-disable-next-line no-undef
-axios.defaults.baseURL = process.env.REACT_APP_API; 
+axios.defaults.baseURL = process.env.REACT_APP_API;
 
 function* idUnica() {
   let index = 0;
   while (true)
     yield index++;
-} 
+}
 export let id = idUnica();
 const removeSpaces = str => str.replace(/\s/g, '');
-export function changeBG(continent){
-  continent=removeSpaces(continent)
-  return {type: CHANGE_BACKGROUND, payload: continent}
+export function changeBG(continent) {
+  continent = removeSpaces(continent)
+  return { type: CHANGE_BACKGROUND, payload: continent }
 }
-export function postActivity(obj) {
- obj
-}
+
 export function fetchActivities() {
   return async function (dispatch) {
     dispatch(loading());
@@ -36,8 +36,10 @@ export function fetchActivities() {
       .catch(err => console.log(err));
   }
 }
-export function fetchCountries() {
+export function fetchCountries(obj) {
+  console.log('f1');
   return async function (dispatch) {
+    console.log('f2');
     dispatch(loading());
     await axios.get(`/countries`)
       .then(async res => await res.data)
@@ -70,11 +72,22 @@ export const getCountries = (array) => {
   return { type: GET_DATA, payload: { countries: array } }
 }
 
-export const addActivity = (obj) => {
-
-  return { type: ADD_ACTIVITY, payload: obj }
+export function addActivity(obj) {
+  return async function (dispatch) {
+    dispatch(loading());
+    await axios.post(`/activities`, obj)
+      .then(async res => await res.data)
+      .then(data => {
+        dispatch(fetchActivities())
+      })
+      .catch(err => console.log(err));
+  }
 }
 
+
+export const pushActivity = (activity) => {
+  return { type: PUSH_ACTIVITY, payload: activity }
+}
 export const deleteActivity = (id) => {
   return { type: DELETE_ACTIVITY, payload: id }
 }

@@ -28,7 +28,7 @@ function PageVar({ currentPage, countries }) {
 
   const page = parseInt(currentPage);
   return (
-    <div className="paginacion">
+    <div className={stl.barritapaginas}>
       <p className={stl.textoencontrados}>
         Resultados Encontrados: {countries.length}
       </p>

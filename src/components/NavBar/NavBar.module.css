@@ -1,6 +1,15 @@
-.container{
- display: flex;
- background-color: darkcyan;
- height: 25px;
- justify-content: space-around;
+.container {
+  display: flex;
+  background-color: darkcyan;
+  height: 45px;
+  z-index: 4;
+  width: 100%;
+  justify-content: space-around;
+  position: fixed;
+  top: 0px;
+}
+@media only screen and (max-width: 700px) {
+  .container {
+    height: 25px;
+  }
 }

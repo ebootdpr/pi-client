@@ -1,0 +1,66 @@
+.divDeActividades {
+  display: flex;
+  flex-direction: var(--iflow);
+  flex-wrap: wrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-items: flex-start;
+  justify-content: space-evenly;
+  overflow: auto;
+  border: solid transparent 1px;
+  min-height: calc(var(--cardH) + 3 * var(--NavBarHeight));
+  min-width: calc(var(--cardW) + 3 * var(--NavBarHeight));
+}
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 10px;
+  border: solid snow;
+  height: var(--cardH);
+  width: var(--cardW);
+  background-color: rgba(123, 123, 146, 0.411);
+}
+.closeButton {
+  display: inline-flex;
+  align-self: flex-end;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+}
+.closeButton:cli
+
+/** CREAR ACTIVIDAD */
+
+.card:hover {
+ transform: scale(1.05);
+}
+.formulario {
+  border: solid rgb(252, 51, 51) var(--borderSizeB);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  width: var(--formWidth);
+  height: var(--formHeigth);
+}
+.labelinput {
+  margin: 5px;
+  font-size: larger;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.warning {
+  border: solid red 1px;
+  border-radius: 0.2em;
+}
+.danger {
+  font-size: 20px;
+  color: red;
+  margin-left: 0;
+  display: block;
+  border: red solid;
+  padding: 10px;
+}

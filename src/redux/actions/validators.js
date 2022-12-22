@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const validActivitiesAtts = ['name', 'season', 'difficulty', 'duration'];
 const validActivitiesAttsAct_ = ['act_name', 'act_season', 'act_difficulty', 'act_duration'];
 const validCountryAtts = ['cca3', 'name', 'flags', 'continents', 'capital', 'subregion', 'area', 'population']
@@ -35,8 +36,8 @@ function isAlphaNumeric(inputStr, ignoreUnits = false, isCCA3 = false) {
   if (isCCA3 && inputStr.length !== 3)
     return [false, 'CCA3 Debe ser igual de longitud de 3 caracteres'];
   if (!ignoreUnits) {
-    if (inputStr.length < 3) return [false, 'Debe ser mayor a 3 caracteres']
     if (!ucase(code)) return [false, 'Debe comenzar con mayusculas'];
+    if (inputStr.length < 3) return [false, 'Debe ser mayor a 3 caracteres']
   }
   const arrayDeStrings = inputStr.split(' ')
   console.log(arrayDeStrings);
@@ -57,26 +58,25 @@ function isAlphaNumeric(inputStr, ignoreUnits = false, isCCA3 = false) {
     }
   }
   return [true, 'Validado'];
-};
-const validateBodyActivities = (body) => {
-  const bodyKeys = Object.keys(body)
-  if (bodyKeys.length === 0) throw new Error('No se envió nada por body');
-  bodyKeys.forEach(key => {
-    if (!validActivitiesAtts.includes(key)) {
-      throw new Error(`No se paso un body valido, debería recibir:
-   ${validActivitiesAtts}
-   se recibió:
-   ${body.season} `);
-    }
-  })
-
-  if (!isAlphaNumeric(body.name)[0]) throw new Error('name ' + isAlphaNumeric(body.name)[1]);
-  if (!isAlphaNumeric(body.season)[0]) throw new Error('season ' + isAlphaNumeric(body.season)[1]);
-  if (!validSeasons.includes(body.season)) throw new Error('Season incorrecta, valid seasons: ' + validSeasons);
-  if (!strIsNumeric(body.difficulty)) throw new Error('difficulty is NaN');
-  if (!strIsNumeric(body.duration)) throw new Error('duration is NaN');
-  if (!parseInt(body.difficulty) > 0 && !parseInt(body.difficulty) < 6) throw new Error('Difficulty no está entre 1 y 5');
-  if (!parseInt(body.duration) > 0) throw new Error('Duration debe ser mayor a 0');
+}
+export const validateBodyActivities = (inputs) => {
+  const errors = {}
+  if (!isAlphaNumeric(inputs.name)[0]) errors.name = ('name ' + isAlphaNumeric(inputs.name)[1]);
+  if (!isAlphaNumeric(inputs.season)[0]) errors.season = ('season ' + isAlphaNumeric(inputs.season)[1]);
+  if (!validSeasons.includes(inputs.season)) errors.season = ('Season incorrecta, valid seasons: ' + validSeasons);
+  if (!strIsNumeric(inputs.duration)) errors.duration = ('duration debe ser un numero');
+  console.log((inputs.difficulty));
+  if (isNaN(parseInt(inputs.difficulty)))
+    errors.difficulty = 'Difficulty debe ser un numero ';
+  else {
+    if (parseInt(inputs.difficulty) < 1) errors.difficulty = 'Difficulty no está entre 1 y 5 ';
+    if (parseInt(inputs.difficulty) > 5) errors.difficulty = 'Difficulty no está entre 1 y 5 ';
+  }
+  if (isNaN(parseInt(inputs.duration)))
+    errors.duration = 'duration debe ser un numero ';
+  else if (!parseInt(inputs.duration) > 0)
+    errors.duration = ('Duration debe ser mayor a 0');
+  return errors
 }
 const validateBodyForBulk = (input) => {
   if (!Array.isArray(input)) throw new Error('Body debe ser un array de paises a crear');
@@ -151,6 +151,7 @@ const validateAssignBody = (reqbody) => {
 
 const validatePageRoute = (params, querys, body) => {
   let page = params.pgnumber, whereObj = null, whereObjIncludes = null, orden = [['cca3', 'ASC']]
+  // eslint-disable-next-line no-prototype-builtins
   if (body.hasOwnProperty('0')) {
     if (!Array.isArray(body) && !(body.length === 1) && typeof body[0][1] !== 'string' && typeof body[0][0] !== 'string')
       throw new Error('Body inválido, debe ser un array con 2 strings como elementos')
@@ -187,17 +188,3 @@ const validatePageRoute = (params, querys, body) => {
   return { page, whereObj, whereObjIncludes, orden }
 }
 
-
-
-module.exports = {
-  isAlphaNumeric,
-  isNum,
-  validateBodyActivities,
-  validateQuery,
-  validateBodyForBulk,
-  validateCountry,
-  validateString,
-  validateCCA3,
-  validateAssignBody,
-  validatePageRoute,
-}

@@ -1,3 +1,28 @@
-.textoencontrados{
- display: inline;
+.textoencontrados {
+  display: inline;
+  color: rgb(83, 117, 148);
+}
+.barritapaginas {
+  background-color: #103532;
+  color: rgb(196, 181, 155);
+  display: flex;
+  flex-wrap: wrap;
+  height: var(--PageBarHeight);
+  width:  calc(100vw - var(--FilterBarWidth));
+  left: 100px;
+  top: 45px;
+  z-index: 4;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  position: fixed;
+  display: block;
+}
+@media only screen and (max-width: 700px) {
+ .barritapaginas {
+  width:  calc(100vw);
+  left: 0px;
+  top: 25px;
+ }
 }

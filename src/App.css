@@ -1,38 +1,54 @@
+:root {
+  --primary-bg: #8a2be2;
+  --borderSizeB: 4px;
+  --formWidth: 600px;
+  --formHeigth: calc(40vh - var(--NavBarHeight));
+  --NavBarHeight: 45px;
+  --PageBarHeight: 45px;
+  --FilterBarWidth: 100px;
+  --FilterBarHeight: calc(100vh - var(--NavBarHeight) - var(--PageBarHeight));
+  --flow: column;
+  --iflow: row;
+  --cardH: 120px;
+  --cardW: 200px;
+}
+
 .App {
   text-align: center;
   display: flex;
   flex-direction: row;
-  align-items:flex-start;
-  justify-content: flex-end;
-  background-position: left top, left top;
-  background-repeat: no-repeat;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-repeat: repeat;
 }
-.paginacion{
-  background-color: #282c34;
-  height: 8%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  justify-items: center;
-}
-.Filtros {
-  background-color: #063b3b;
+.rutacountries{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  height: max-content;
-  width: 20%;
+  flex-direction: var(--flow);
+  background-color: #8a2be2;
 }
-@media only screen and (max-width: 600px){
+.rutaactivities{
+  background-color: #8a2be2;
+  display: flex;
+  position: absolute  ;
+  flex-direction: var(--iflow);
+  top: var(--NavBarHeight);
+  width: 100vw;
+  height: calc(100vh - var(--NavBarHeight));
+
+}
+@media only screen and (max-width: 700px) {
   /*Big smartphones [426px -> 600px]*/
+  :root {
+
+    --flow: row;
+    --iflow: column;
+    --NavBarHeight: 25px;
+    --PageBarHeight: 25px;
+    --FilterBarWidth: 100vw;
+    --FilterBarHeight: 100px;
+    --formWidth: calc(100vw -  var(--cardW));
+    --formHeigth: 33%;
 
 
- 
   }
-
-
-  
+}
