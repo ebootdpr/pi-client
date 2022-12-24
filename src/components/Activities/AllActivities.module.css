@@ -11,6 +11,22 @@
   min-height: calc(var(--cardH) + 3 * var(--NavBarHeight));
   min-width: calc(var(--cardW) + 3 * var(--NavBarHeight));
 }
+
+
+/* div[draggable-object]{
+	border: 1px solid silver;
+    border-radius: 3px;
+    box-shadow: 0 0 4px #afafaf;
+    width: fit-content;
+    padding: 10px;
+    position: relative;
+    
+    font-size: 10px;
+    
+    cursor: move;
+} */
+
+
 .card {
   display: inline-flex;
   flex-direction: column;
@@ -63,4 +79,47 @@
   display: block;
   border: red solid;
   padding: 10px;
+}
+
+
+
+.card {
+  width: var(--cardW);
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  cursor: move;
+}
+
+.card:active {
+  background-color: #bbb;
+}
+
+.card.dragover {
+  border: 2px dashed #000;
+}
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #000;
+}
+.closeButton:hover {
+  color: rgb(168, 22, 22);
+  text-shadow: 0px 0px 1px rgb(134, 6, 96);
 }

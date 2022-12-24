@@ -7,41 +7,38 @@
   align-content: flex-start;
   justify-items: center;
   justify-content: space-between;
-  width: calc(100vw - 100px);
-  height: calc(100vh - 90px);
-  left: 100px;
-  top: 90px;
+  width: var(--countriesW);
+  height: var(--countriesH);
+  left: var(--FilterBarWidth);
   overflow: auto;
+  min-height: var(--cardH);
 }
 .bg {
-  position: fixed;
-  background-attachment: fixed;
-  width: calc(100vw - 110px);
+  position: absolute;
+  background-attachment: scroll;
+  width: var(--countriesW);
+  height: var(--countriesH);
+  left: var(--FilterBarWidth);
   background-color: saddlebrown;
-  left: 100px;
-  top: 90px;
-  height: calc(100vh - 90px);
+  top: var(--PageBarHeight);
   background-position: center top, left top;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-size: 100% 100%;
+  min-height: var(--cardH);
 }
-.bg:hover {
-  position: fixed;
-  width: 100px;
-}
-@media only screen and (max-width: 700px) {
+
+@media only screen and (max-width: 800px) {
   .container {
-    /* top: 50px;
-    height: calc(100vh - 50px);
-    flex-direction: column; */
+    left: 0;
+    flex-wrap: nowrap;
+    min-height: var(--cardH);
   }
   .bg {
-    width: calc(100vw - 100px);
-    left: 100px;
-    top: 50px;
-    height: calc(100vh - 50px);
+    left: 0;
+    width: 100vw;
+    top: calc(var(--NavBarHeigth) + var(--PageBarHeight));
     background-position: center top, left top;
-    background-repeat: repeat;
+    min-height: var(--cardH);
     background-size: 100% 100%;
   }
 }

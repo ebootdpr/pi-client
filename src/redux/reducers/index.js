@@ -1,5 +1,5 @@
 
-import { ADD_ACTIVITY, CHANGE_BACKGROUND, DELETE_ACTIVITY, GET_DATA, LOADING } from "../actions"
+import {CHANGE_BACKGROUND, DELETE_ACTIVITY, GET_DATA, LOADING, PUT_ACTIVITY } from "../actions"
 const initialState =
 {
   activities: [],
@@ -7,7 +7,7 @@ const initialState =
   FiltredCountries: [],
   loading: false,
   currentPage: '1',
-  selectedActivity: {},
+  selectedCountry: {},
   background: 'Other'
 
 }
@@ -19,11 +19,13 @@ function rootReducer(state = initialState, action) {
       return { ...state, background: action.payload }
     case GET_DATA:
       return { ...state, loading: false, ...action.payload }
-    case ADD_ACTIVITY:
-      return { ...state, loading: false, ...action.payload }
     case DELETE_ACTIVITY:
-      // const listaFiltrada = state.actividades.filter(elem => action.payload !== elem.id)
-      return { ...state }
+      return { ...state, selectedCountry: {...state.selectedCountry, Activities: state.selectedCountry.Activities.filter(ele=>ele.name!==action.payload)} }
+    case PUT_ACTIVITY:
+      // eslint-disable-next-line no-case-declarations
+      const nuevaListaDeActiviades = state.selectedCountry.Activities
+      nuevaListaDeActiviades.push(state.activities.find(ele=>ele.id===action.payload));
+      return { ...state, selectedCountry: {...state.selectedCountry, Activities: nuevaListaDeActiviades} }
     default:
       return { ...state }
   }

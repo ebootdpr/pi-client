@@ -9,8 +9,8 @@
   flex-wrap: wrap;
   height: var(--PageBarHeight);
   width:  calc(100vw - var(--FilterBarWidth));
-  left: 100px;
-  top: 45px;
+  left: var(--FilterBarWidth);
+  top: var(--NavBarHeight);
   z-index: 4;
   align-items: center;
   justify-content: center;
@@ -19,10 +19,9 @@
   position: fixed;
   display: block;
 }
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
  .barritapaginas {
   width:  calc(100vw);
   left: 0px;
-  top: 25px;
  }
 }

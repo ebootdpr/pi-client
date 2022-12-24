@@ -15,9 +15,9 @@ export default function NavBar() {
   const history = useHistory();
   return (
     <div className={stylo.container}>
-      <button onClick={()=>handleClick("/about")}>Acerca de</button>
-      <button onClick={()=>handleClick("/activities")}>Actividades Turísticas</button>
-      <button onClick={()=>handleClick("/countries")}>Países</button>
+      <button className={stylo.buttonX} onClick={()=>handleClick("/about")}>Acerca de</button>
+      <button className={stylo.buttonX} onClick={()=>handleClick("/activities")}>Actividades</button>
+      <button  className={stylo.buttonX} onClick={()=>handleClick("/countries")}>Países</button>
     </div>
   )
 }

@@ -1,34 +1,38 @@
 import React from "react";
 import stylo from "./Country.module.css";
-import { changeBG } from "../../redux/actions";
+import { changeBG, fetchByCCA3 } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 Country.propTypes = {
   name: PropTypes.string.isRequired,
+  cca3: PropTypes.string.isRequired,
   flags: PropTypes.string.isRequired,
   continents: PropTypes.string.isRequired
 };
 
 /*
-  area: "180"
-capital: "Oranjestad"
-cca3: "ABW"
-continents: "North America"
-flags: "https://flagcdn.com/aw.svg"
-name: "Aruba"
-population: "106766"
-subregion: "Caribbean"
+  ? DISEÑO
+  hacer que al clickear aparezca el detal como fixed
+  hacer q todos lso botones de fondo sean inclickeables con disable
   */
-export default function Country({ name, flags, continents }) {
+export default function Country({cca3, name, flags, continents }) {
   const dispatch = useDispatch();
   const handleMouseEnter = () => {
     dispatch(changeBG(continents));
-    console.log(continents);
   };
+  const history = useHistory();
   const handleMouseLeave = () => {
     dispatch(changeBG('Other'));
   };
+
+  function handleClick(string) {
+    dispatch(fetchByCCA3(string))
+    history.push('/countries/details');
+  }
+  
+     
   return (
     <div
       className={stylo.container}
@@ -38,9 +42,10 @@ export default function Country({ name, flags, continents }) {
       onMouseLeave={()=>{
         handleMouseLeave()
       }}
+      onClick={()=>handleClick("/"+cca3)}
     >
-      <div className={stylo.title}> {name} </div>
-      <div className={stylo.cca3}> Continente: {continents}</div>
+      <div className={stylo.textName}> {name} </div>
+      <div className={stylo.textContinent}> Continente: {continents}</div>
       <img className={stylo.flag} src={flags} alt="Bandera del pais :" />
     </div>
   );

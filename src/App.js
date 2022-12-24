@@ -13,6 +13,7 @@ import PageBar from './components/PageBar/PageBar';
 import About from './components/About/About';
 import Activities from './components/Activities/Activities';
 import CreateActivity from './components/Activities/CreateActivity'
+import CountryDetails from './components/CountryDetails/CountryDetails';
 //sad
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Switch>
           <Route exact path="/about">
             <About />
+          </Route>
+          <Route exact path="/countries/details">
+            <CountryDetails />
+            <Activities filtered={true}/>
           </Route>
           <Route exact path="/countries">
             <div className="rutacountries">
@@ -35,7 +40,7 @@ function App() {
 
           <Route exact path="/activities">
             <div className="rutaactivities">
-              <Activities />
+              <Activities filtered={false}/>
               <CreateActivity />
             </div>
           </Route>

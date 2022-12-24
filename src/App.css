@@ -1,16 +1,28 @@
 :root {
+  --maxW: 800px;
   --primary-bg: #8a2be2;
   --borderSizeB: 4px;
   --formWidth: 600px;
   --formHeigth: calc(40vh - var(--NavBarHeight));
   --NavBarHeight: 45px;
   --PageBarHeight: 45px;
-  --FilterBarWidth: 100px;
+  --FilterBarWidth: 120px;
   --FilterBarHeight: calc(100vh - var(--NavBarHeight) - var(--PageBarHeight));
   --flow: column;
   --iflow: row;
+  --countriesH: 100%;
+  --countriesW: 100%;
   --cardH: 120px;
-  --cardW: 200px;
+  --cardW: 250px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  max-height: 100vh;
 }
 
 .App {
@@ -21,34 +33,34 @@
   justify-content: flex-start;
   background-repeat: repeat;
 }
-.rutacountries{
-  display: flex;
-  flex-direction: var(--flow);
-  background-color: #8a2be2;
+.rutacountries {
+  background-color: #2aa734;
+  position: absolute;
+  top: calc(var(--NavBarHeight));
+  left: 0;
+  width: calc(100vw);
+  height: calc(100vh - var(--NavBarHeight));
 }
-.rutaactivities{
+.rutaactivities {
   background-color: #8a2be2;
-  display: flex;
-  position: absolute  ;
-  flex-direction: var(--iflow);
+  position: absolute;
   top: var(--NavBarHeight);
   width: 100vw;
   height: calc(100vh - var(--NavBarHeight));
-
 }
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   /*Big smartphones [426px -> 600px]*/
   :root {
-
     --flow: row;
     --iflow: column;
-    --NavBarHeight: 25px;
+    /* --NavBarHeight: 25px; */
     --PageBarHeight: 25px;
     --FilterBarWidth: 100vw;
-    --FilterBarHeight: 100px;
-    --formWidth: calc(100vw -  var(--cardW));
+    --FilterBarHeight: 200px;
+    --formWidth: calc(100vw - var(--cardW));
     --formHeigth: 33%;
-
-
+    --countriesW: 100vw;
+    --countriesH: calc(100vh - 50vh);
+    --cardW: 200px;
   }
 }
