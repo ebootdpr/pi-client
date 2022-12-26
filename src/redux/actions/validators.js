@@ -61,21 +61,23 @@ function isAlphaNumeric(inputStr, ignoreUnits = false, isCCA3 = false) {
 }
 export const validateBodyActivities = (inputs) => {
   const errors = {}
-  if (!isAlphaNumeric(inputs.name)[0]) errors.name = ('name ' + isAlphaNumeric(inputs.name)[1]);
-  if (!isAlphaNumeric(inputs.season)[0]) errors.season = ('season ' + isAlphaNumeric(inputs.season)[1]);
-  if (!validSeasons.includes(inputs.season)) errors.season = ('Season incorrecta, valid seasons: ' + validSeasons);
-  if (!strIsNumeric(inputs.duration)) errors.duration = ('duration debe ser un numero');
+  if (!isAlphaNumeric(inputs.name)[0]) errors.name = ('Nombre ' + isAlphaNumeric(inputs.name)[1]);
+  if (inputs.name==="") errors.name = ('Escriba un nombre' );
+
+  if (!isAlphaNumeric(inputs.season)[0]) errors.season = ('Estacion ' + isAlphaNumeric(inputs.season)[1]);
+  if (!validSeasons.includes(inputs.season)) errors.season = ('Estacion incorrecta, valid seasons: ' + validSeasons);
+  if (!strIsNumeric(inputs.duration)) errors.duration = ('Duracion debe ser un numero');
   console.log((inputs.difficulty));
   if (isNaN(parseInt(inputs.difficulty)))
-    errors.difficulty = 'Difficulty debe ser un numero ';
+    errors.difficulty = 'Dificultad debe ser numerico';
   else {
-    if (parseInt(inputs.difficulty) < 1) errors.difficulty = 'Difficulty no está entre 1 y 5 ';
-    if (parseInt(inputs.difficulty) > 5) errors.difficulty = 'Difficulty no está entre 1 y 5 ';
+    if (parseInt(inputs.difficulty) < 1) errors.difficulty = 'Dificultad no está entre 1 y 5 ';
+    if (parseInt(inputs.difficulty) > 5) errors.difficulty = 'Dificultad no está entre 1 y 5 ';
   }
   if (isNaN(parseInt(inputs.duration)))
-    errors.duration = 'duration debe ser un numero ';
+    errors.duration = 'Duracion debe ser un numero ';
   else if (!parseInt(inputs.duration) > 0)
-    errors.duration = ('Duration debe ser mayor a 0');
+    errors.duration = ('Duracion debe ser mayor a 0');
   return errors
 }
 const validateBodyForBulk = (input) => {

@@ -5,6 +5,7 @@ export const PUT_ACTIVITY = 'PUT_ACTIVITY'
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY'
 export const LOADING = 'LOADING'
 export const CHANGE_BACKGROUND = 'CHANGE_BACKGROUND'
+export const CHANGE_SEARCHTERMS = 'CHANGE_SEARCHTERMS'
 
 // eslint-disable-next-line no-undef
 axios.defaults.baseURL = process.env.REACT_APP_API;
@@ -141,6 +142,9 @@ export const loading = () => {
   return { type: LOADING }
 }
 
+export const changeSearchterms = (obj) => {
+  return { type: CHANGE_SEARCHTERMS, payload: obj }
+}
 export const deleteActivity = (name) => {
   return { type: DELETE_ACTIVITY, payload: name }
 }

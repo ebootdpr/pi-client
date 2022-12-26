@@ -1,0 +1,45 @@
+.container {
+  width: 50%;
+  height: calc(100vh - var(--NavBarHeight));
+ 
+  
+}
+
+.flags {
+ border: 1px solid;
+  width: 50%;
+  margin-left: auto;
+  align-self: flex-end;
+  order: 0;
+  flex-wrap: wrap;
+}
+
+.Activities {
+ display: flex;
+ flex-wrap: wrap;
+ border: 1px solid;
+ flex-direction: row;
+ align-items: flex-start;
+ justify-content: center;
+}
+.Activity {
+ flex-wrap: wrap;
+ border: 2px solid;
+}
+.area {
+
+}
+.population {
+
+}
+.cca3 {
+
+}
+.name {
+}
+.continents {
+}
+.capital {
+}
+.subregion {
+}

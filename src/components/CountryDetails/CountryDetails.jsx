@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assignActivity } from "../../redux/actions";
 import Activity from "../Activities/Activity";
+import stl from "./CountryDetails.module.css"
 
 export default function CountryDetails() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function CountryDetails() {
   /*
   Guarda en un estado local global
   */
- const listaActividadesDelPais = useSelector(state=>state.selectedCountry.Activities)
+//  const listaActividadesDelPais = useSelector(state=>state.selectedCountry.Activities)  
   const [idActivity, setIdActivity] = useState(""); //crea un store local vacio al inicio
   const handleDrop = (ev) => {
     ev.preventDefault();
@@ -27,7 +28,7 @@ export default function CountryDetails() {
   }, [idActivity]);//se ejecuta al actualizarse idActivity
 
   return (
-    <div
+    <div className={stl['container']}
       onDrop={(ev) => handleDrop(ev)}
       onDragOver={(ev) => ev.preventDefault()}
       
@@ -35,28 +36,29 @@ export default function CountryDetails() {
       {selectedCountry
         ? Object.keys(selectedCountry).map((key) => {
             return (
-              <div key={key}>
+              <div className={stl[key]} key={key}>
                 {key === "Activities" ? (
                   selectedCountry[key].map((act) => {
-                    return (
-                      <Activity
+                    return (<div className={stl['Activity']} key={act.name}>
+                      <Activity 
                         belongsToCountry={selectedCountry.cca3}
-                        key={act.name}
+                        
                         name={act.name}
                         season={act.season}
                         difficulty={act.difficulty}
                         duration={act.duration}
-                      />
+                      /></div>
                     );
                   })
-                ) : (
-                  <p>{key + ": " + selectedCountry[key]}</p>
+                ) : key === 'flags' ?
+                <img className={stl[key]} src={selectedCountry[key]}></img> 
+                :(
+                  <p  className={stl[key]}>{key + ": " + selectedCountry[key]}</p>
                 )}
               </div>
             );
           })
         : null}
-      This is: {idActivity}
     </div>
   );
 }

@@ -19,11 +19,12 @@ export default function Activities({ filtered }) {
   const selectedCountry = useSelector((state) => state.selectedCountry);
 
   useEffect(() => {
-    console.log(selectedCountry);
-    if (filtered)
+    dispatch(fetchActivities());
+  }, []);
+
+  useEffect(() => {
+    if (filtered && selectedCountry.Activities)
       setvisibleActivities(selectedCountry.Activities.map((ele) => ele.name));
-    if (!filtered) dispatch(fetchActivities());
-    console.log(activities);
     modificarDisplay();
   }, [dispatch, selectedCountry]);
 
@@ -39,7 +40,7 @@ export default function Activities({ filtered }) {
               if (!visibleActivities.includes(act.name))
                 return (
                   <Activity
-                    filtered={filtered}
+                    filtered={filtered} //disingir entre tipo de instancias, boton X
                     key={act.name}
                     id={act.id}
                     name={act.name}

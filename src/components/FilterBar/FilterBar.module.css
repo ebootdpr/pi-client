@@ -1,14 +1,10 @@
 .container {
   background-color: #101428;
   display: flex;
-  position: relative;
+  position: static;
   width: var(--FilterBarWidth);
   height: var(--FilterBarHeigth);
   flex-direction: var(--flow);
-  align-items: center;
-  align-content: flex-start;
-  justify-content: flex-start;
-  font-size: calc(2vh +2vw);
   color: white;
 }
 

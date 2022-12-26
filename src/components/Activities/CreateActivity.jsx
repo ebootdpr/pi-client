@@ -3,14 +3,14 @@ import React from "react";
 //estado local, no es necesario globarl para el formuario
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addActivity, fetchActivities } from "../../redux/actions";
+import { addActivity } from "../../redux/actions";
 import Activity from "./Activity";
 import { validateBodyActivities } from "../../redux/actions/validators";
 import stl from "./AllActivities.module.css";
+import { useSelector } from "react-redux";
 
 export default function CreateActivity() {
   const dispatch = useDispatch();
-
   const handleSubmit = (evento) => {
     evento.preventDefault();
     // dispatch(fetchActivities());
@@ -43,18 +43,7 @@ export default function CreateActivity() {
     difficulty: "",
     duration: "",
   });
-  const handleClick = (evento) => {
-    setInputs({
-      ...inputs,
-      ["season"]: evento.target.value,
-    });
-    setErrors(
-      validateBodyActivities({
-        ...inputs,
-        ["season"]: evento.target.value,
-      })
-    );
-  };
+
   const handleChange = (evento) => {
     setInputs({
       ...inputs,
@@ -67,7 +56,12 @@ export default function CreateActivity() {
       })
     );
   };
-
+  const habilitar =
+    
+    errors.name ||
+    errors.difficulty ||
+    errors.season ||
+    errors.duration;
   return (
     <div className={stl.crearActividad}>
       <h1>Crear nueva actividad turística: </h1>
@@ -94,21 +88,7 @@ export default function CreateActivity() {
             value={inputs.season}
             onChange={handleChange}
           />
-          {/* <select>
-            <option onClick={handleClick} value="Verano">
-            Verano
-            </option>
-            <option onClick={handleClick} value="Primavera">
-            Primavera
-            </option>
-            <option onClick={handleClick} value="Otoño">
-              Otoño
-            </option>
-            <option onClick={handleClick} value="Invierno">
-              Invierno
-              </option>
-            </select> */}
-          {/* {errors.season ? <p className={stl.danger}>{errors.season}</p> : null} */}
+
         </div>
         <div className={stl.labelinput}>
           <label htmlFor="">Difficultad:</label>
@@ -119,10 +99,6 @@ export default function CreateActivity() {
             value={inputs.difficulty}
             onChange={handleChange}
           />
-
-          {/* {errors.difficulty ? (
-            <p className={stl.danger}>{errors.difficulty}</p>
-          ) : null} */}
         </div>
 
         <div className={stl.labelinput}>
@@ -134,26 +110,22 @@ export default function CreateActivity() {
             value={inputs.duration}
             onChange={handleChange}
           />
-          {/* {errors.duration ? (
-            <p className={stl.danger}>{errors.duration}</p>
-          ) : null} */}
         </div>
-        <button type="submit">Enviar</button>
-        {errors.name ||
-        errors.difficulty ||
-        errors.season ||
-        errors.duration ? (
+        <button disabled={!inputs.name ||habilitar} type="submit">
+          Enviar
+        </button>
+        {habilitar ? (
           <div className={stl.danger}>
             {Object.keys(errors).map((key) => {
               return <p key={key}>★{errors[key]}</p>;
             })}
           </div>
         ) : (
-          <div>Listo para Enviar</div>
+          null
         )}
       </form>
 
-      <Activity 
+      <Activity
         name={inputs.name}
         season={inputs.season}
         difficulty={inputs.difficulty}
