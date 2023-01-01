@@ -1,0 +1,46 @@
+.LandingPageContainer {
+    position: absolute;
+    top: -1px;
+    bottom: 0px;
+    width: 101vw;
+    height: 101vh; 
+    overflow: hidden;
+
+    object-fit: cover;
+  }
+  .LandingPageContainer video {
+    /* Make video to at least 100% wide and tall */
+    min-width: 100%; 
+    min-height: 100%;
+  
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    width: auto;
+    height: auto;
+  
+    /* Center the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+
+    pointer-events: all;
+
+ /*Hace la magia*/
+    object-fit: cover;
+  }
+  .mainTitle{
+    color: aliceblue;
+    position: absolute; /* or absolute */
+    top: 40%;
+    left: 40%;
+    width: 100%;
+    z-index: 2;
+  }
+  .mainTitle:hover{
+    transition: 2s;
+    transform: scaleX(2) scaleY(2);
+
+    top: 40%;
+    left: 85%;
+  }

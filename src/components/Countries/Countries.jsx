@@ -6,18 +6,22 @@ import stylo from "./Countries.module.css";
 
 export default function Countries() {
   const dispatch = useDispatch();
-  useEffect(() => {dispatch(fetchCountries());}, []);
   const background = useSelector((state) => state.background);
-  const countries = useSelector((state) => state.countries);
+  const countries = useSelector((state) => state.countries); //para la primera descargada de la DB
+  const showableCountries = useSelector((state) => state.showableCountries);
   const loading = useSelector((state) => state.loading);
 
+  useEffect(() => {
+      if(countries.length===0) dispatch(fetchCountries()) //primera descargada
+  }, []);
   let display = <div>No se ha fetcheado nada ...</div>;
   if (countries.length) {
     display = (
       <div className={stylo.container}>
-        {countries?.map((item) => {
+        {showableCountries?.map((item, index) => {
           return (
             <Country
+            gridpos= {index}
               key={item.cca3}
               cca3={item.cca3}
               name={item.name}
@@ -39,8 +43,7 @@ export default function Countries() {
         style={{
           backgroundImage: `url(/img/${background}.png) ,url(/img/background.png)`,
         }}
-      ></div>
-      <div>{loading ? <div>Cargando...</div> : display}</div>
+      >{loading ? <div>Cargando...</div> : display}</div>
     </div>
   );
 }

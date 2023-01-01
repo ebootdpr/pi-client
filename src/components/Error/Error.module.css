@@ -1,0 +1,46 @@
+.errorcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+position: fixed;
+width: 30%;
+height: 30%;
+pointer-events: all;
+color: rgb(248, 6, 6);;
+top: 5%;
+left: 35%;
+border: 4px #aa4242 double;
+padding: 20px;
+z-index: 11;
+
+}
+.moving{
+    position: fixed;
+width: 30%;
+height: 30%;
+background-color: rgb(255, 255, 255);
+pointer-events: all;
+cursor: grab;
+color: red;
+top: 30px;
+left: 30px;
+border: 4px rgb(223, 20, 20);
+z-index: 11;
+    cursor: grabbing;
+    border: 4px brown solid;
+}
+.h1error{
+    pointer-events: none;
+}
+.closeError{
+z-index: 12;
+border-radius: 3px;
+width: 100%;
+
+}
+.errorMessage{
+    pointer-events: none;
+    z-index: 12;
+
+}

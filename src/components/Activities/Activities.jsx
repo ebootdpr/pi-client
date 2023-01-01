@@ -59,5 +59,5 @@ export default function Activities({ filtered }) {
       );
   }
   modificarDisplay();
-  return <div className={stl.divDeActividades}>{display}</div>;
+  return <div className={filtered ? stl.divDeActividadesDentroDeDetails : stl.divDeActividades}>{display}</div>;
 }

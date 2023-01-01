@@ -1,42 +1,47 @@
 .divDeActividades {
   display: flex;
-  flex-direction: var(--iflow);
-  flex-wrap: wrap;
-  align-items: stretch;
-  align-content: flex-start;
-  justify-items: flex-start;
+  flex-direction: row;
   justify-content: space-evenly;
-  overflow: auto;
-  border: solid transparent 1px;
-  min-height: calc(var(--cardH) + 3 * var(--NavBarHeight));
-  min-width: calc(var(--cardW) + 3 * var(--NavBarHeight));
+  align-items: flex-end;
+  overflow: scroll;
+  width: 80%;
+  border: solid rgb(255, 255, 255) 2px;
+  background-color: rgba(28, 170, 170, 0.46);
+  border-radius: 18px;
+  margin-left: 10%;
+  margin-top: 4px;
+  height: 95%;
+  flex-wrap: wrap;
 }
 
+.divDeActividadesDentroDeDetails{
 
-/* div[draggable-object]{
-	border: 1px solid silver;
-    border-radius: 3px;
-    box-shadow: 0 0 4px #afafaf;
-    width: fit-content;
-    padding: 10px;
-    position: relative;
-    
-    font-size: 10px;
-    
-    cursor: move;
-} */
-
-
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
+  background-color: #101428;
+}
+.crearActividad{
+  display: inline;
+  width: 200px;
+}
 .card {
   display: inline-flex;
   flex-direction: column;
   margin: 5px;
   padding: 10px;
   border: solid snow;
-  height: var(--cardH);
-  width: var(--cardW);
+  height: 110px;
+  min-width: 250px;
+  max-width: 250px;
+  max-height: 250px;
+  max-height: 250px;
+  overflow: hidden;
   background-color: rgba(123, 123, 146, 0.411);
 }
+
+
+
 .closeButton {
   display: inline-flex;
   align-self: flex-end;
@@ -46,23 +51,73 @@
 }
 .closeButton:cli
 
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #000;
+}
+.closeButton:hover {
+  color: rgb(168, 22, 22);
+  text-shadow: 0px 0px 1px rgb(134, 6, 96);
+}
 /** CREAR ACTIVIDAD */
 
 .card:hover {
  transform: scale(1.05);
 }
 .formulario {
-  border: solid rgb(252, 51, 51) var(--borderSizeB);
+  position: relative;
+  border: solid rgba(19, 195, 28, 0.765) 4px;
+  background-color: rgb(195, 174, 137);
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  width: var(--formWidth);
-  height: var(--formHeigth);
+  width: 460px;
+  line-height: 0.0;
+  height: auto;
+  font-size: medium;
+  min-height: calc(100vh - 60px - 137.5px);
+  margin-left: calc(50% - 230px);
+  
+}
+.formulario h2{
+
+  align-self: center;
+  display: block;
+  
+  font-size: 40px;
+}
+.formulario div{
+  align-self: center;
+  line-height: 1.5;
 }
 .labelinput {
   margin: 5px;
   font-size: larger;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.labelinput input {
+  margin: 5px;
+  font-size: larger;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.formulario button {
+  margin: 5px;
+  font-size: larger;
+  width: 20%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -73,11 +128,13 @@
   border-radius: 0.2em;
 }
 .danger {
-  font-size: 20px;
+  font-size: 18px;
   color: red;
-  margin-left: 0;
+  margin-left: 4;
+  font-weight: bolder;
+
   display: block;
-  border: red solid;
+  border: red solid 1px;
   padding: 10px;
 }
 
@@ -99,7 +156,7 @@
   -webkit-user-select: none;
   -o-user-select: none;
   -ms-user-select: none;
-  cursor: move;
+  cursor: grab;
 }
 
 .card:active {
@@ -109,17 +166,85 @@
 .card.dragover {
   border: 2px dashed #000;
 }
-.closeButton {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+
+
+
+.formulario button {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
   cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: #000;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+  max-width: 245px;
+  min-width: 245px;
+  margin-left: calc(50% - 122.5px);
 }
-.closeButton:hover {
-  color: rgb(168, 22, 22);
-  text-shadow: 0px 0px 1px rgb(134, 6, 96);
+
+.formulario button:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
+
+.formulario button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+
+.formulario button:disabled {
+  box-shadow: #141468 0 3px 7px inset;
+  transform: translateY(2px);
+}
+.formulario button:active {
+  box-shadow: #141468 0 3px 7px inset;
+  transform: translateY(2px);
+
+}
+
+@media (max-width: 800px) {
+  .crearActividad{
+    display: inline;
+    width: 95%;
+  }
+.divDeActividades {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: scroll;
+  width: 95%;
+  border: solid rgb(255, 255, 255) 2px;
+  background-color: rgba(28, 170, 170, 0.46);
+  border-radius: 18px;
+  margin-left: 2.5%;
+  margin-top: 4px;
+  height: 135px;
+}
+.formulario{
+  margin-left: 2.5%;
+  width: 88%;
+  border-radius: 18px;
+}
+}
+

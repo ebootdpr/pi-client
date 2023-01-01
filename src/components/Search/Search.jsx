@@ -1,81 +1,116 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { changeSearchterms, fetchCountriesFiltered, setQuerys } from "../../redux/actions";
+import PropTypes from 'prop-types';
 
-/*
- ?DISEÑO
- // Va a entrar por props los terminos posibles q se pudan buscar, y si llevan prefix o no
- // El prefix o es vacio "" o es "act_"
- // Este componente solo recibe datos, los procesa y los envía, seria un compoente puro
- //Este compoente renderiza todas las posibilidades
- Este componente muestra todos los cuadors de busqueda posibles
- Va a enviar una dispatcheada de solo los props que no esten vacios
- Al hacer submit, va a almacenar en el estado global los terminos de busqueda
- Deberia de protegerse de entradas inalidas
- TODOS DEBEN SER STRINGS
- TODO: Diseño A)
-  Todaas las del localstatey luego al hacer submit los pasa a int si es necesario
-  al estado global le debe enviar undefined si esta vacio
-  revisa el estado global al montarse, si es undefined, lo ignora
-
-  ?PROPS
-  Solo al montarse, toma el estado global q viene de props
-  y actualiza las entradas para q se visualizen segun el diseño A)
- */
 class Search extends Component {
-  // eslint-disable-next-line no-unused-vars
-  constructor(_props) {
-    super();
-    this.state = {
-      modo: "Por Actividad",
-      countriesSearchTerms: {
-        cca3: "",
-        name: "",
-        flags: "",
-        continents: "",
-        capital: "",
-        subregion: "",
-        area: "",
-        population: "",
-      },
-      activitiesSearchTerms: {
-        act_name: "",
-        act_season: "",
-        act_duration: "",
-        act_difficulty: "",
-      },
-     };
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-    if(this.state.modo==="Por Actividad")
-    this.setState({...this.state, modo: "Por País"});
-    else
-    this.setState({...this.state, modo: "Por Actividad"});
-   Object.keys(this.state.countriesSearchTerms)
-  }
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleClick}>X</button>
-        {this.state.modo ==="Por Actividad" ? (
-          Object.keys(this.state.countriesSearchTerms).map(attr=>{
-           return <input value={this.state.countriesSearchTerms[attr]} placeholder={attr} key={attr}></input>
-          })
-        ) : (
-          <h1>{"Por País"}</h1>
-        )}
-      </div>
-    );
-  }
-}
+    constructor(props) {
+        super(props);
+        this.emptySearchTerms = {
+            cca3: "",
+            name: "",
+            flags: "",
+            continents: "",
+            capital: "",
+            subregion: "",
+            area: "",
+            population: "",
+            act_name: "",
+            act_season: "",
+            act_duration: "",
+            act_difficulty: "",
+        };
+        this.state = {
+            localSearchTerms: {
+                cca3: "",
+                name: "",
+                flags: "",
+                continents: "",
+                capital: "",
+                subregion: "",
+                area: "",
+                population: "",
+                act_name: "",
+                act_season: "",
+                act_duration: "",
+                act_difficulty: "",
+            },
+        };
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
+        this.handleReset = this.handleReset.bind(this)
+    }
+    handleReset = () => {
 
+        this.setState({ ...this.state, localSearchTerms: this.emptySearchTerms})
+        this.props.changeSearchterms()
+        this.props.setQuerys("")
+        this.props.fetchCountriesFiltered("")
+    }
+    handleSubmit = (ev) => {
+        ev.preventDefault()
+        this.props.changeSearchterms({
+            ...this.state.localSearchTerms
+        })
+        const array = Object.keys(this.state.localSearchTerms).map(key => {
+            if (this.state.localSearchTerms[key] !== "") { //searchTerm no vacío? 
+                return `${key}=${this.state.localSearchTerms[key]}`
+            }
+        });
+
+        const querys = '?' + array.filter(n => n).join('&&')
+        this.props.setQuerys(querys)
+        this.props.fetchCountriesFiltered(querys)
+    }
+    handleChange = (ev) => {
+        this.setState({ ...this.state, localSearchTerms: { ...this.state.localSearchTerms, [ev.target.name]: ev.target.value } })
+    }
+    componentDidMount() {
+        console.log('THIS IS MOUNTED NOW')
+        this.setState({ ...this.props, localSearchTerms: { ...this.props.SearchTerms } })
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <p >FIltros de Paises:</p>
+                {(
+                    Object.keys(this.state.localSearchTerms).map(attr => {
+
+                        if (attr.slice(0, 4) !== 'act_') {
+                            return <input name={attr} value={this.state.localSearchTerms[attr]} placeholder={attr} key={attr} onChange={this.handleChange}></input>
+                        }
+                    })
+                )}
+                <p >Filtros de Actividades:</p>
+                {(
+                    Object.keys(this.state.localSearchTerms).map(attr => {
+                        if (attr.slice(0, 4) === 'act_')
+                            return <input name={attr} value={this.state.localSearchTerms[attr]} placeholder={attr.slice(4)} key={attr} onChange={this.handleChange}></input>
+                    })
+                )}
+                <button type="submit">APLICAR FILTROS</button>
+                <button onClick={this.handleReset}>LIMPIAR</button>
+            </form>
+        );
+    }
+}
+Search.propTypes = {
+    SearchTerms: PropTypes.object,
+    changeSearchterms: PropTypes.func,
+    fetchCountriesFiltered: PropTypes.func,
+    setQuerys: PropTypes.func,
+}
 const mapStateToProps = (state) => {
-  console.log(state);
-  return { SearchTerms: state.SearchTerms };
+    return { SearchTerms: state.SearchTerms };
 };
 const mapDispatchToProps = (dispatch) => {
-  console.log(dispatch);
-  //increment: ()=>{dispatch(increment())
-  return {};
+    //increment: ()=>{dispatch(increment())
+    return {
+        changeSearchterms: (obj) => { dispatch(changeSearchterms(obj)) },
+        fetchCountriesFiltered: (query) => { dispatch(fetchCountriesFiltered(query)) },
+        setQuerys: (querys) => { dispatch(setQuerys(querys)) }
+    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

@@ -21,44 +21,60 @@ export default function CountryDetails() {
     setIdActivity(ev.dataTransfer.getData("text/plain"));
      //modifica store local
   };
-
   useEffect(() => { //se ejecuta al modificarse el store local
     if (idActivity)//para ignorar cuando se monta.
-      dispatch(assignActivity([[selectedCountry.cca3], [idActivity]]));//dentro de un useEffect por el delay
+      dispatch(assignActivity([[selectedCountry.cca3], [idActivity]]));
   }, [idActivity]);//se ejecuta al actualizarse idActivity
+
 
   return (
     <div className={stl['container']}
       onDrop={(ev) => handleDrop(ev)}
       onDragOver={(ev) => ev.preventDefault()}
-      
     >
-      {selectedCountry
-        ? Object.keys(selectedCountry).map((key) => {
-            return (
-              <div className={stl[key]} key={key}>
-                {key === "Activities" ? (
-                  selectedCountry[key].map((act) => {
+      <div className={stl.detailscontainer}>
+        <div  className={stl['name']}>
+          <h3>CCA3 y Nombre: </h3>
+          <h4>{'['}{selectedCountry.cca3}{']'} {selectedCountry.name}</h4>
+        </div>
+        <div  className={stl['continents']}>
+          <h3>Continente: </h3>
+          <h4>{selectedCountry.continents}</h4>
+        </div>
+        <div  className={stl['capital']}>
+          <h3>Capital: </h3>
+          <h4>{selectedCountry.capital}</h4>
+        </div>
+        <div  className={stl['subregion']}>
+          <h3>subregion: </h3>
+          <h4>{selectedCountry.subregion}</h4>
+        </div>
+        <div  className={stl['area']}>
+          <h3>Area: </h3>
+          <h4>{selectedCountry.area}</h4>
+        </div>
+        <div  className={stl['population']}>
+          <h3>Populación: </h3>
+          <h4>{selectedCountry.population}</h4>
+        </div>
+        <div  className={stl['flags']}>
+          <img src={selectedCountry.flags} alt="Bandera del pais" />
+        </div>
+        <div className={stl.actividadesInternas}>
+        <h3>Actividades Turísticas:</h3>
+          {selectedCountry['Activities']?.map((act) => {
                     return (<div className={stl['Activity']} key={act.name}>
                       <Activity 
                         belongsToCountry={selectedCountry.cca3}
-                        
                         name={act.name}
                         season={act.season}
                         difficulty={act.difficulty}
                         duration={act.duration}
                       /></div>
                     );
-                  })
-                ) : key === 'flags' ?
-                <img className={stl[key]} src={selectedCountry[key]}></img> 
-                :(
-                  <p  className={stl[key]}>{key + ": " + selectedCountry[key]}</p>
-                )}
-              </div>
-            );
-          })
-        : null}
+                  })}
+          </div>
+        </div>
     </div>
   );
 }

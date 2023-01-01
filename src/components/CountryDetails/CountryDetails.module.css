@@ -1,45 +1,142 @@
 .container {
-  width: 50%;
-  height: calc(100vh - var(--NavBarHeight));
- 
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 1200px;
+  background-color: #101428;
+  color: rgb(255, 255, 255);
 }
 
-.flags {
- border: 1px solid;
-  width: 50%;
-  margin-left: auto;
-  align-self: flex-end;
-  order: 0;
+.detailscontainer {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0;
+  width: 100%;
 }
 
-.Activities {
- display: flex;
- flex-wrap: wrap;
- border: 1px solid;
- flex-direction: row;
- align-items: flex-start;
- justify-content: center;
+.actividadesInternas,
+.name,
+.cca3,
+.continents,
+.capital,
+.subregion,
+.area,
+.population,
+.flags {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(50% - 10px);
+  margin: 1px;
+  padding: 2px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.actividadesInternas h3,
+.name h3,
+.cca3 h3,
+.continents h3,
+.capital h3,
+.subregion h3,
+.area h3,
+.population h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  display: inline-block;
+}
+.actividadesInternas h4,
+.name h4,
+.cca3 h4,
+.continents h4,
+.capital h4,
+.subregion h4,
+.area h4,
+.population h4 {
+  margin: 10px 0 0;
+  font-size: 1.1rem;
+  
+  display: inline-block;
+}
+
+.flags img {
+  width: 100%;
+  max-width: 300px;
+  margin: 20px 0;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.actividadesInternas {
+  color: black;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  justify-content: flex-start;
+  
+
+  width: calc(50% - 10px);
+  max-height: 400px;
+}
+.actividadesInternas h3{
+  color: white;
 }
 .Activity {
- flex-wrap: wrap;
- border: 2px solid;
-}
-.area {
+  width: (50%);
 
 }
-.population {
 
-}
-.cca3 {
+@media (max-width: 800px) {
 
-}
-.name {
-}
-.continents {
-}
-.capital {
-}
-.subregion {
+  .actividadesInternas,
+  .name,
+  .cca3,
+  .continents,
+  .capital,
+  .subregion,
+  .area,
+  .population,
+  .flags {
+    width: 100%;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: auto;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #101428;
+    color: rgb(255, 255, 255);
+  }
+  
+  .detailscontainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 10px;
+    width: 100%;
+  }
+  .actividadesInternas{
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  
+  }
+
+  .Activity {
+    
+    width: 50%;
+    height: 55%;
+    margin-top: 20px;
+    margin-bottom: 22px;
+  }
 }

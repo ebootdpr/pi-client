@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 //estado local, no es necesario globarl para el formuario
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,14 +8,22 @@ import Activity from "./Activity";
 import { validateBodyActivities } from "../../redux/actions/validators";
 import stl from "./AllActivities.module.css";
 import { useSelector } from "react-redux";
+import BulkActivities from "./BulkActivities";
+import PropTypes from 'prop-types';
 
-export default function CreateActivity() {
+CreateActivity.propTypes = {
+  filtered: PropTypes.bool,
+
+}
+
+export default function CreateActivity(props) {
   const dispatch = useDispatch();
   const handleSubmit = (evento) => {
     evento.preventDefault();
     // dispatch(fetchActivities());
     const len = Object.entries(errors).length;
     console.log(len);
+
     if (len === 0) dispatch(addActivity(inputs));
     setErrors({
       name: "",
@@ -56,16 +64,29 @@ export default function CreateActivity() {
       })
     );
   };
-  const habilitar =
+  //#region  Busqueda por si esta repetido:
+  const activities = useSelector((state) => state.activities);
+  const [paisesDisponibles, setpaisesDisponibles] = useState([])
+  let booleanoCambiante = false
+  useEffect(() => {
+    //buscador funciona
+    booleanoCambiante = activities.some(activity => activity.name===inputs.name)
+    if(booleanoCambiante)
+    setErrors({...errors, alreadyExist: '¡Esa activdad Ya Existe!'})
     
-    errors.name ||
+}, [inputs.name])
+
+//#endregion
+  const habilitar =errors.name ||
     errors.difficulty ||
     errors.season ||
-    errors.duration;
+    errors.duration ||
+    errors.alreadyExist;
   return (
     <div className={stl.crearActividad}>
-      <h1>Crear nueva actividad turística: </h1>
+      {/*props.filtered ? <BulkActivities/>: null*/}
       <form className={stl.formulario} action="" onSubmit={handleSubmit}>
+      <h2>Crear actividad </h2>
         <div className={stl.labelinput}>
           <label htmlFor="">Nombre: </label>
           <input
@@ -123,14 +144,16 @@ export default function CreateActivity() {
         ) : (
           null
         )}
-      </form>
-
-      <Activity
+        <Activity
+        filtered = {true}
         name={inputs.name}
         season={inputs.season}
         difficulty={inputs.difficulty}
         duration={inputs.duration}
       />
+      </form>
+
+      
     </div>
   );
 }

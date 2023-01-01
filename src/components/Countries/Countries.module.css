@@ -1,44 +1,46 @@
 .container {
   display: flex;
-  position: relative;
-  flex-direction: var(--iflow);
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: stretch;
   align-content: flex-start;
   justify-items: center;
-  justify-content: space-between;
-  width: var(--countriesW);
-  height: var(--countriesH);
-  left: var(--FilterBarWidth);
-  overflow: auto;
-  min-height: var(--cardH);
+  justify-content: space-around;
+  overflow-y: scroll;
+  height: 100vh; 
+  flex-wrap: wrap;
+  max-height: calc(100vh - 60px - 60px);
+  border-radius: 1%;
+  overflow-x: hidden;
+
 }
 .bg {
-  position: absolute;
   background-attachment: scroll;
-  width: var(--countriesW);
-  height: var(--countriesH);
-  left: var(--FilterBarWidth);
-  background-color: saddlebrown;
-  top: var(--PageBarHeight);
   background-position: center top, left top;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-  min-height: var(--cardH);
+  background-size: calc(100% - 400px) 100%;
+  background-position-x: 200px;
+  border-radius: 20%;
+}
+
+
+.container {
+  display: grid; 
+  position: relative;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(3, 1fr); 
+  grid-gap: 10px;
 }
 
 @media only screen and (max-width: 800px) {
-  .container {
-    left: 0;
-    flex-wrap: nowrap;
-    min-height: var(--cardH);
-  }
   .bg {
-    left: 0;
-    width: 100vw;
-    top: calc(var(--NavBarHeigth) + var(--PageBarHeight));
-    background-position: center top, left top;
-    min-height: var(--cardH);
-    background-size: 100% 100%;
+    background-size: 100%  100%;
+    background-position-x: 0;
+  background-repeat: no-repeat;
+    border-radius: 55%;
   }
 }
+
+
+
+

@@ -1,56 +1,14 @@
-:root {
-  --maxW: 800px;
-  --primary-bg: #8a2be2;
-  --borderSizeB: 4px;
-  --formWidth: 600px;
-  --NavBarHeight: 45px;
-  --formHeigth: calc(40vh - var(--NavBarHeight));
-  --PageBarHeight: 45px;
-  --FilterBarWidth: 120px;
-  --FilterBarHeigth: calc(100vh - var(--NavBarHeight) - var(--PageBarHeight));
-  
-  --flow: column;
-  --iflow: row;
-  --countriesH: 100%;
-  --countriesW: 100%;
-  --cardH: 120px;
-  --cardW: 250px;
-}
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family: "Montserrat", sans-serif;
-  line-height: 1.4;
-  margin: 0;
-  max-height: 100vh;
-}
+:root{
 
-.App {
-
+    --CardH: 200px;
+    --CardW: 120px;
 }
-.rutacountries {
-}
-.rutaactivities {
-  background-color: #8a2be2;
-  position: absolute;
-  top: var(--NavBarHeight);
-  width: 100vw;
-  height: calc(100vh - var(--NavBarHeight));
+.App{
+    background-color: #101428;
 }
 @media only screen and (max-width: 800px) {
-  /*Big smartphones [426px -> 600px]*/
-  :root {
-    --flow: row;
-    --iflow: column;
-    /* --NavBarHeight: 25px; */
-    --PageBarHeight: 25px;
-    --FilterBarWidth: 100vw;
-    --FilterBarHeigth: 200px;
-    --formWidth: calc(100vw - var(--cardW));
-    --formHeigth: 33%;
-    --countriesW: 100vw;
-    --countriesH: calc(100vh - 50vh);
-    --cardW: 200px;
-  }
+    .root{
+        --CardW: calc(100vw / 5);
+
+      }
 }

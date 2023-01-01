@@ -1,11 +1,46 @@
 .container {
+    /*Arriba de todo*/
+    position: fixed;
+    z-index: 4;
+
   background-color: #101428;
-  display: flex;
-  position: static;
-  width: var(--FilterBarWidth);
-  height: var(--FilterBarHeigth);
-  flex-direction: var(--flow);
+  width: 412px;
+  height: 326px; 
+  top: 13vh;
+  left: 17vw;
+    
   color: white;
+  /*Para las casillas*/
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap ;
 }
 
+.button{
+display: inline-flex;
+height: 30px;
+}
+.button {
+	overflow: hidden;
+	position: absolute;
+	border: none;
+    right: 0px;
+	padding: 0;
+	width: 2em; height: 2em;
+	border-radius: 50%;
+	background: transparent;
+	color: #1da1f2;
+	font: inherit;
+	text-indent: 100%;
+	cursor: pointer;
+}	
+button:focus {
+		outline: solid 0 transparent;
+		box-shadow: 0 0 0 2px #8ed0f9
+	}
+	
+	.button:hover {
+		background: rgba(29, 161, 142, .1)
+	}
+	
 
