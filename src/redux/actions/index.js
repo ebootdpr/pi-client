@@ -34,6 +34,7 @@ export const CHANGE_ORDER = 'CHANGE_ORDER'
 export const CHANGE_SEARCHTERMS = 'CHANGE_SEARCHTERMS'
 //#endregion
 
+require('dotenv').config();
 // eslint-disable-next-line no-undef
 axios.defaults.baseURL = process.env.REACT_APP_API;
 
