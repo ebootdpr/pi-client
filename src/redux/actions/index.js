@@ -36,7 +36,7 @@ export const CHANGE_SEARCHTERMS = 'CHANGE_SEARCHTERMS'
 
 
 // eslint-disable-next-line no-undef
-axios.defaults.baseURL = process.env.REACT_APP_URL;
+axios.defaults.baseURL = 'https://pi-countries-rodrigo-toobe-production.up.railway.app';
 
 function* idUnica() {
     let index = 0;
