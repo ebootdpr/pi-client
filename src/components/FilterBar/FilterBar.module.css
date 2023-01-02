@@ -1,23 +1,49 @@
 .container {
     /*Arriba de todo*/
     position: fixed;
-    z-index: 4;
+    z-index: 9;
 
   background-color: #101428;
   width: 412px;
-  height: 326px; 
+  height: auto; 
   top: 13vh;
   left: 17vw;
-    
+   pointer-events: all; 
   color: white;
   /*Para las casillas*/
   display: flex;
   flex-direction: column;
   flex-wrap: wrap ;
-}
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: solid;
 
+
+}
+.container hr{
+width: 80%;
+border-style: groove;
+}
 .button{
 display: inline-flex;
+height: 30px;
+}
+.container button{
+display: inline-flex;
+height: 30px;
+width: 80%;
+margin-left: 10%;
+margin-bottom: 1px;
+}
+.container input {
+width: 78.5%;
+margin-left: 10%;
+height: 44px;
+}
+.container select{
+width: 80%;
+margin-left: 10%;
+margin-top: 2px;
 height: 30px;
 }
 .button {

@@ -7,6 +7,7 @@ export default function PageBar() {
   const dispatch = useDispatch();
   const filteredCountries = useSelector((state) => state.filteredCountries);
   const currentPage = useSelector((state) => state.currentPage);
+    const currentOrder = useSelector(state=>state.currentOrder)
   const [paisesDisponibles, setpaisesDisponibles] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
 
@@ -25,17 +26,17 @@ export default function PageBar() {
     dispatch(updateShowableCountries(filteredCountries.slice(0, 9)))
     setpaisesDisponibles(filteredCountries)
     setSearchTerm("")
-}, [filteredCountries])
+}, [filteredCountries, currentOrder])
 
 
   /*
-    *    maxPage  9 = 9%10 + 1 = 1 
-    *    maxPage 10 = 11%10 + 1= 2
-    *    maxPage 19 = 19%10 +1 = 2
-    *    maxPage 20 = 21%10 +1 = 3
+    *    maxPage  9 = 9/10 + 1 = 1 
+    *    maxPage 10 = 11/10 + 1= 2
+    *    maxPage 19 = 19/10 +1 = 2
+    *    maxPage 20 = 21/10 +1 = 3
    */
-  const maxPage = paisesDisponibles.length <= 9 ? 1 :  Math.floor((paisesDisponibles.length+1)/10)
-  
+  const maxPage = paisesDisponibles.length <= 9 ? 1 :  Math.ceil((paisesDisponibles.length+1)/10)
+  2
 
   //funciona perfecto
     const handlePageChange = newPage => {

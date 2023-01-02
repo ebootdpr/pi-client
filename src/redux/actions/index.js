@@ -62,7 +62,7 @@ export function changeBG(continent) {
  * @returns un resuelve getActivities que devuelve un dispatch o hace un dispatch de display error
  */
 export function fetchActivities() {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.get(`/activities`)
             .then(async res => await res.data)
@@ -82,7 +82,7 @@ export function fetchActivities() {
  * @returns 
  */
 export function fetchCountriesFiltered(querys) { //ahcerlo en el reducer
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.get(`/countries` + querys)
             .then(async res => await res.data)
@@ -100,11 +100,23 @@ export function fetchCountriesFiltered(querys) { //ahcerlo en el reducer
  * @returns dispatch de los paises encontrados con lo q retorne getCountries
  */
 export function fetchCountries() {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.get(`/countries`)
             .then(async res => await res.data)
             .then(data => {
+                for (const pais of data.data) {
+                    if (!isNaN(pais.area)) {
+                        pais.area = parseInt(pais.area)
+                    } else {
+                        pais.area = 0
+                    }
+                    if (!isNaN(pais.population)) {
+                        pais.population = parseInt(pais.population)
+                    }else{
+                     pais.population = 0
+                    }
+                }
                 dispatch(getCountries(data.data)) //objecto {Sucess: true, data: [pais,pais,pais,pais]}
                 dispatch(updateFilteredCountries(data.data))
             })
@@ -120,7 +132,7 @@ export function fetchCountries() {
  * @returns dispatch directo
  */
 export function fetchByCCA3(query) {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.get(`/countries${query}`)
             .then(async res => await res.data)
@@ -139,7 +151,7 @@ export function fetchByCCA3(query) {
  * @returns hace un fetch de todas las actividades
  */
 export function addActivity(obj) {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.post(`/activities`, [obj])
             .then(async res => await res.data)
@@ -157,19 +169,24 @@ export function addActivity(obj) {
  * @returns 
  */
 export function assignActivity(arrayPaisYactivityID) {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.put(`/activities`, arrayPaisYactivityID)
             .then(async res => await res.data)
             .then(data => {
+                if(arrayPaisYactivityID[0].length === 1 && arrayPaisYactivityID[1].length ===1)
                 dispatch(putActivity(parseInt(arrayPaisYactivityID[1][0])))
+                else
+                dispatch(fetchCountries())
             })
-            .catch(err => dispatch({ type: DISPLAY_ERROR, payload: err.response.data.message }));
+            .catch(err => {
+                console.log(err)
+                dispatch({ type: DISPLAY_ERROR, payload: err.response.data.message })});
     }
 }
 
 export function deleteActivityGlobally(name) {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.delete(`/activities/all?name=${name}`)
             .then(async res => await res.data)
@@ -181,7 +198,7 @@ export function deleteActivityGlobally(name) {
 }
 
 export function deleteActivityLocally(name, cca3) {
-    return async function (dispatch) {
+    return async function(dispatch) {
         dispatch(loading());
         await axios.delete(`/activities?name=${name}&cca3=${cca3}`)
             .then(async res => await res.data)
@@ -203,8 +220,8 @@ export const getCountries = (array) => {
 export const loading = () => {
     return { type: LOADING }
 }
-export const bulkCreate = (booleano)=>{
-    return {type: BULK_CREATE, payload: booleano}
+export const bulkCreate = (booleano) => {
+    return { type: BULK_CREATE, payload: booleano }
 }
 
 export const changeSearchterms = (obj) => {
@@ -221,7 +238,7 @@ export const verFiltros = () => {
     return { type: VER_FILTROS }
 }
 export const changeOrder = (countries, atributoAOdenar, orden) => {
-    return function (dispatch) {
+    return function(dispatch) {
         dispatch(setOrder(atributoAOdenar, orden))
         dispatch(getCountries(countries))
     }
@@ -241,10 +258,10 @@ export const updateShowableCountries = (newShowabeCountries) => {
 export const updateFilteredCountries = (newFilteredCountries) => {
     return { type: UPDATE_FILTERED_COUNTRIES, payload: newFilteredCountries }
 }
-export const updateActiveFilters = (object)=>{
-return {type: FILTROS_ACTIVOS, payload: object}
+export const updateActiveFilters = (object) => {
+    return { type: FILTROS_ACTIVOS, payload: object }
 }
 export const updateCurrentPage = (newPage) => {
-    return {type: CHANGE_PAGE, payload: newPage}
+    return { type: CHANGE_PAGE, payload: newPage }
 }
 //#endregion

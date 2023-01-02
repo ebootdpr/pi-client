@@ -12,7 +12,7 @@ export default function Countries() {
   const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-      if(countries.length===0) dispatch(fetchCountries()) //primera descargada
+      dispatch(fetchCountries()) //primera descargada
   }, []);
   let display = <div>No se ha fetcheado nada ...</div>;
   if (countries.length) {
