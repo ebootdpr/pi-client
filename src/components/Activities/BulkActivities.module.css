@@ -13,8 +13,9 @@ color: rgb(6, 6, 6);
 overflow-y: scroll;
 max-height: calc(100vh - 60px - 200px);
 bottom: 0;
-width: 250px;
-margin-left: 30px;
+width: 100%;
+min-width: 100%;
+margin-left: 3px;
 }
 .disponiblesContainer h1{
   color: rgb(247, 247, 247);
@@ -106,3 +107,30 @@ width: 80%;
     color: rgb(168, 22, 22);
     text-shadow: 0px 0px 1px rgb(134, 6, 96);
   }
+.sucessBox{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    width: 50%;
+    height: 30%;
+    pointer-events: all;
+    color: rgb(255, 255, 255);;
+    top: 15%;
+    left: 25%;
+    border: 8px #0aae28 solid;
+    
+    padding: 20px;
+z-index: 6;
+background-color: rgb(64, 61, 95);
+
+}
+.sucessBox button{
+height: 100%;
+width: 30%;
+font-size: larger;
+font-weight: bolder;
+min-width: 100%;
+align-self: flex-end;
+
+}

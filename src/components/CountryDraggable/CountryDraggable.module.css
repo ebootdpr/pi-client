@@ -16,6 +16,7 @@
   max-width: 200px;
   min-width: 200px;
 
+  display: inline-flex;
 }
 
 
@@ -194,6 +195,7 @@
 }
 .closeButton {
   display: inline-flex;
+  visibility: hidden;
   align-self: flex-end;
   top: 2px;
   right: 2px;

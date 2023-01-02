@@ -5,6 +5,7 @@
 }
 .App{
     background-color: #101428;
+    min-height: 100vh;
 }
 @media only screen and (max-width: 800px) {
     .root{
