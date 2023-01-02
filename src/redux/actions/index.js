@@ -36,7 +36,7 @@ export const CHANGE_SEARCHTERMS = 'CHANGE_SEARCHTERMS'
 
 
 // eslint-disable-next-line no-undef
-axios.defaults.baseURL = process.env.REACT_APP_API;
+axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 function* idUnica() {
     let index = 0;
