@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route
+  BrowserRouter as Router,
+  Switch,
+  Route
 } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar"
 import Countries from './components/Countries/Countries'
@@ -21,54 +21,54 @@ import Loading from './components/Loading/Loading';
 import BulkActivities from './components/Activities/BulkActivities';
 //sad
 function App() {
-    const displayFilters = useSelector(store => store.displayFilters)
-    const displayError = useSelector(store => store.displayError)
-    const bulkCreateMode = useSelector(store=>store.bulkCreateMode)
-    const loading = useSelector(store=>store.loading)
+  const displayFilters = useSelector(store => store.displayFilters)
+  const displayError = useSelector(store => store.displayError)
+  const bulkCreateMode = useSelector(store => store.bulkCreateMode)
+  const loading = useSelector(store => store.loading)
 
-    return (
-        <Router>
-            {
-                <div className="App" >
-                    {displayError ? <Error /> :null}{/*se debe de cerrar haciendo click*/}
-                    {loading ? <Loading /> :null} {/*se cierra sola a los 30s*/}
+  return (
+    <Router>
+      {
+        <div className="App" >
+          {displayError ? <Error /> : null}{/*se debe de cerrar haciendo click*/}
+          {loading ? <Loading /> : null} {/*se cierra sola a los 30s*/}
 
-                    <Switch>
-                    <Route exact path="/">
-                            <LandingPage />
-                        </Route>
-                        <Route exact path="/about">
-                        <NavBar />
-                            <About />
-                        </Route>
-                        <Route exact path="/countries/details">
-                        <NavBar />
-                            <CountryDetails />
-                            <Activities filtered={true} />
-                        </Route>
-                        <Route exact path="/countries">
-                        <NavBar />
-                            {displayFilters ? <FilterBar /> : null}
-                            
-                            <Countries />
-                            <PageBar />
-                        </Route>
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <Route exact path="/about">
+              <NavBar />
+              <About />
+            </Route>
+            <Route exact path="/countries/details">
+              <NavBar />
+              <CountryDetails />
+              <Activities filtered={true} />
+            </Route>
+            <Route exact path="/countries">
+              <NavBar />
+              {displayFilters ? <FilterBar /> : null}
 
-                        <Route exact path="/activities">
-                        <NavBar />
-                        {bulkCreateMode ? <BulkActivities/>:
-                            <CreateActivity filtered={false}/>}
-                        {bulkCreateMode ? null:
-                            <Activities filtered={false} />}
-                        
-                            
-                        </Route>
-                    </Switch>
+              <Countries />
+              <PageBar />
+            </Route>
 
-                </div>
-            }
-        </Router>
-    );
+            <Route exact path="/activities">
+              <NavBar />
+              {bulkCreateMode ? <BulkActivities /> :
+                <CreateActivity filtered={false} />}
+              {bulkCreateMode ? null :
+                <Activities filtered={false} />}
+
+
+            </Route>
+          </Switch>
+
+        </div>
+      }
+    </Router>
+  );
 }
 
 export default App;
